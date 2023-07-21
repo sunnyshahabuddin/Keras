@@ -1,8 +1,6 @@
 DECLARE
-  input_number NUMBER := 78455.1155; -- Replace this with your input number
-  output_number NUMBER;
+  v_close NUMBER := 482303.4356; -- Replace this with your actual number
 BEGIN
-  output_number := TO_NUMBER(CASE WHEN input_number >= 1000 THEN SUBSTR(TO_CHAR(input_number), 1, LENGTH(TO_CHAR(TRUNC(input_number))) - 3) ELSE '0' END);
-  DBMS_OUTPUT.PUT_LINE('Output: ' || output_number);
+  DBMS_OUTPUT.PUT_LINE(CASE WHEN v_close >= 1000 THEN SUBSTR(v_close, -6, 3) || '.' || TO_CHAR(MOD(v_close, 1), '00')
+                            ELSE TO_CHAR(v_close, '999.00') END);
 END;
-/
