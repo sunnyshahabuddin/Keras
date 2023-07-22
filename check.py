@@ -1,17 +1,28 @@
-input_file = "input.txt"
-output_file = "output.txt"
+// dashboard.component.ts
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-with open(input_file, "r") as f_input, open(output_file, "w") as f_output:
-    for line in f_input:
-        # Split the line using '|' as the delimiter
-        parts = line.strip().split('|')
-        
-        if len(parts) >= 7:
-            # Remove the 7th '|' from the list of parts
-            parts.pop(6)
-            
-            # Join the modified parts back together with '|' and write to the output file
-            modified_line = '|'.join(parts) + '\n'
-            f_output.write(modified_line)
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
+})
+export class DashboardComponent {
+  data: any[] = [];
 
-print("Task completed. The modified data has been written to output.txt.")
+  constructor(private http: HttpClient) { }
+
+  getData() {
+    const apiUrl = 'http://localhost:3000/api/dashboard';
+
+    this.http.get<any[]>(apiUrl).subscribe(
+      (response) => {
+        this.data = response;
+        console.log('Data from API:', this.data);
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
+}
