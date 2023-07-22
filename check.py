@@ -1,6 +1,6 @@
-// dashboard.component.ts
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,19 +10,16 @@ import { HttpClient } from '@angular/common/http';
 export class DashboardComponent {
   data: any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getData() {
+  getData(): void {
+    this.getDataFromApi().subscribe((result: any) => {
+      this.data = result;
+    });
+  }
+
+  getDataFromApi(): Observable<any> {
     const apiUrl = 'http://localhost:3000/api/dashboard';
-
-    this.http.get<any[]>(apiUrl).subscribe(
-      (response) => {
-        this.data = response;
-        console.log('Data from API:', this.data);
-      },
-      (error) => {
-        console.error('Error fetching data:', error);
-      }
-    );
+    return this.http.get(apiUrl);
   }
 }
