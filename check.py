@@ -32,7 +32,7 @@ export class InfocusComponent implements AfterViewInit {
       options: {
         scales: {
           y: {
-            beginAtZero: false,
+            beginAtZero: false, // You can set this to true if you want the Y-axis to start at zero
             ticks: {
               stepSize: 0.01,
               precision: 2,
