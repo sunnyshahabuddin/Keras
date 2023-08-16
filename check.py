@@ -4,9 +4,16 @@ import pandas as pd
 excel_file_path = 'path/to/your/excel/file.xlsx'
 df = pd.read_excel(excel_file_path)
 
+# Check the column names in your DataFrame
+print("Column names:", df.columns)
+
+# Replace 'E' and 'L' with the actual column names from your Excel file
+column_e_name = 'Column_E_Name'
+column_l_name = 'Column_L_Name'
+
 # Extract values from columns E and L
-column_e_values = df['E'].tolist()
-column_l_values = df['L'].tolist()
+column_e_values = df[column_e_name].tolist()
+column_l_values = df[column_l_name].tolist()
 
 # Find values in column E but not in column L
 e_not_in_l = [value for value in column_e_values if value not in column_l_values]
