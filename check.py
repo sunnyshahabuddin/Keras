@@ -12,9 +12,6 @@ user_id = 'G025555'
 data['Reporting_Period'] = reporting_period
 data['User_id'] = user_id
 
-# Reorder columns to have the hardcoded ones first
-data = data[['Reporting_Period', 'User_id'] + [col for col in data.columns if col not in ['Reporting_Period', 'User_id']]]
-
 # Create a pipe-separated .dat file
 dat_file_path = 'output.dat'
 data.to_csv(dat_file_path, sep='|', index=False)
