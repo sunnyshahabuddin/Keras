@@ -1,17 +1,19 @@
-const axios = require('axios');
-const https = require('https');
-const fs = require('fs');
+const request = require('request');
+const kerberos = require('kerberos');
 
 const url = 'http://localhost:5000/api/v1.0/kerberos';
-const agent = new https.Agent({
-  ca: fs.readFileSync('C:\\Users\\user\\Documen\\ca-7.pem')
-});
+const auth = new kerberos.HTTPKerberosAuth();
 
-axios.get(url, { httpsAgent: agent })
-  .then(response => {
-    const token = response.data;
-    console.log(token);
-  })
-  .catch(error => {
-    console.error(error);
-  });
+const options = {
+  url: url,
+  auth: auth,
+  verify: 'C:\Users\user\Documen\ca-7.pem'
+};
+
+request.get(options, (err, response, body) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(body);
+  }
+});
