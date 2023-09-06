@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from statsmodels.tsa.statespace.sarimax import SARIMAX
+import statsmodels.api as sm
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from math import sqrt
 
@@ -26,8 +26,8 @@ p, d, q = 1, 1, 1  # Non-seasonal parameters
 P, D, Q, S = 1, 1, 1, 4  # Seasonal parameters (weekly data)
 
 # Fit the SARIMA model
-sarima_model = SARIMAX(train, order=(p, d, q), seasonal_order=(P, D, Q, S))
-sarima_result = sarima_model.fit(disp=False)
+sarima_model = sm.tsa.SARIMA(train, order=(p, d, q), seasonal_order=(P, D, Q, S))
+sarima_result = sarima_model.fit()
 
 # Forecast using the trained model
 forecast = sarima_result.get_forecast(steps=len(test))
