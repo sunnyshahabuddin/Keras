@@ -1,38 +1,20 @@
-{
-  "name": "usecase2",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
-}
+import pandas as pd
+
+# Replace 'your_file.xlsx' with the path to your Excel file
+file_path = 'your_file.xlsx'
+
+# Load the Excel file into a DataFrame
+df = pd.read_excel(file_path)
+
+# Replace 'A' with the column name you want to read
+column_name = 'A'
+
+# Extract the column as a list
+column_data = df[column_name].tolist()
+
+# Create a list of JSON objects
+json_data = [{"id": i+1, "name": name} for i, name in enumerate(column_data)]
+
+# Print the JSON objects
+for obj in json_data:
+    print(obj)
