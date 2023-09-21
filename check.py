@@ -1,28 +1,9 @@
-import sqlite3
+Models = ["m1", "m2", "m3"]
+RMSE = [10.0, 5.0, 7.0]
+MAPE = [2.0, 1.0, 3.0]
 
-# Replace 'your_database.db' with the actual path to your SQLite database file
-db_file = 'your_database.db'
-
-# Connect to the SQLite database
-conn = sqlite3.connect(db_file)
-cursor = conn.cursor()
-
-# Read SQL INSERT statements from the file
-with open('insert_statements.txt', 'r') as file:
-    insert_statements = file.read().split(';')
-
-# Remove any empty statements
-insert_statements = [statement.strip() for statement in insert_statements if statement.strip()]
-
-# Start a transaction
-conn.execute("BEGIN TRANSACTION;")
-
-# Execute the INSERT statements
-for statement in insert_statements:
-    cursor.execute(statement)
-
-# Commit the transaction to save changes to the database
-conn.execute("COMMIT;")
-
-# Close the database connection
-conn.close()
+model_data = [{'model': model, 'RMSE': rmse, 'MAPE': mape, 'rank': 0} for model, rmse, mape in zip(Models, RMSE, MAPE)]
+sorted_model_data = sorted(model_data, key=lambda x: (x['RMSE'], x['MAPE']))
+for rank, data in enumerate(sorted_model_data, start=1):
+    data['rank'] = rank
+print(sorted_model_data)
