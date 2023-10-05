@@ -1,9 +1,61 @@
-Models = ["m1", "m2", "m3"]
-RMSE = [10.0, 5.0, 7.0]
-MAPE = [2.0, 1.0, 3.0]
+import json
+import mysql.connector
 
-model_data = [{'model': model, 'RMSE': rmse, 'MAPE': mape, 'rank': 0} for model, rmse, mape in zip(Models, RMSE, MAPE)]
-sorted_model_data = sorted(model_data, key=lambda x: (x['RMSE'], x['MAPE']))
-for rank, data in enumerate(sorted_model_data, start=1):
-    data['rank'] = rank
-print(sorted_model_data)
+# JSON data
+json_data = '''
+{
+  "data": {
+    "applicationProductView": [
+      {
+        "attr1": 123,
+        "attr2": null,
+        "attr3": 43
+      },
+      {
+        "attr1": null,
+        "attr2": null,
+        "attr3": 1113
+      },
+      {
+        "attr1": 12121,
+        "attr2": null,
+        "attr3": 43
+      }
+    ]
+  }
+}
+'''
+
+# Load JSON data
+data = json.loads(json_data)
+
+# Extract column names dynamically
+columns = list(data['data']['applicationProductView'][0].keys())
+
+# MySQL connection setup
+db_config = {
+    "host": "your_host",
+    "user": "your_username",
+    "password": "your_password",
+    "database": "your_database",
+}
+
+conn = mysql.connector.connect(**db_config)
+cursor = conn.cursor()
+
+# Loop through the JSON array and insert data into the database
+for item in data['data']['applicationProductView']:
+    # Create the SQL INSERT statement dynamically
+    placeholders = ', '.join(['%s'] * len(columns))
+    column_names = ', '.join(columns)
+    sql = f"INSERT INTO your_table_name ({column_names}) VALUES ({placeholders})"
+
+    # Convert 'None' to None for NULL values
+    values = [item[column] if item[column] is not None else None for column in columns]
+
+    # Execute the SQL statement
+    cursor.execute(sql, values)
+    conn.commit()
+
+# Close the database connection
+conn.close()
