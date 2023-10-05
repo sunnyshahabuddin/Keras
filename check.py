@@ -1,36 +1,35 @@
-Certainly, when explaining one of the tiles on your dashboard, such as "Average Lead Time for the Last 6 Months in TC25 for Jacqui Areas," you can use the following script as a guide:
+Certainly, when explaining a tile on your dashboard, such as "Percentage of Pull Requests Without Approval," you can use the following script as a guide:
 
 *Title:*
-"Average Lead Time for Last 6 Months in TC25 for Jacqui Areas"
+"Percentage of Pull Requests Without Approval"
 
 *Explanation:*
-"Let's dive into one of the tiles on our dashboard, which provides valuable insights into our project performance. This tile focuses on the average lead time for the last 6 months specifically within TC25, a crucial area for us, while considering the broader context of Jacqui Areas."
+"Let's explore another significant tile on our dashboard that sheds light on our project's efficiency in managing pull requests. This tile specifically focuses on the percentage of pull requests that are submitted without receiving prior approval."
 
 *Key Points:*
 
-1. *Understanding Lead Time:*
-   - "Lead time" refers to the duration it takes for a user story to go from initiation to completion.
-   - It's a critical metric that helps us gauge how efficiently we are delivering user stories.
+1. *Importance of Pull Requests:*
+   - "Pull requests" are crucial for code review and quality control in our development process.
+   - They allow team members to review and approve code changes before they are merged into the main codebase.
 
-2. *Granular Focus:*
-   - "TC25" is our specific area of interest. We're looking at lead times here, which is vital to understand for this area.
-   - "Jacqui Areas" represent a broader context within which TC25 operates. This allows us to see how TC25 performs within the larger framework.
+2. *Tracking Approval Process:*
+   - It's essential to track how many pull requests are submitted without prior approval.
+   - This metric helps us assess the effectiveness of our code review process and identify areas for improvement.
 
-3. *Percentage Context:*
-   - We're not just looking at the average lead time in isolation; we're also examining it as a percentage.
-   - This percentage represents how our TC25 lead time compares to the overall average, giving us a quick view of TC25's performance relative to the whole.
+3. *Percentage Metric:*
+   - The data is presented as a percentage.
+   - This percentage represents the proportion of pull requests that were not approved before submission, relative to the total number of pull requests in the given timeframe.
 
-4. *Global Lead Level:*
-   - At the same time, this tile provides insights at the global lead level.
-   - This allows us to see the overall status and trends across our project, which is crucial for making informed decisions.
+4. *Quick Insight:*
+   - This tile provides a quick snapshot of our pull request approval process.
+   - A higher percentage may indicate that some code changes are being merged without proper review, which could lead to quality issues.
 
-5. *Future Enhancements:*
-   - We have plans to enhance this tile even further in the future.
-   - We're working on providing more detailed data at the global lead level, including insights at the delivery lead level.
-   - This means we'll have even more granular information for decision-making.
+5. *Continuous Improvement:*
+   - We use this metric to drive continuous improvement in our development workflow.
+   - By monitoring this percentage, we can take proactive steps to ensure that code changes are thoroughly reviewed before merging.
 
 *Interactive Element:*
-"Feel free to interact with this tile. You can click on specific data points to drill down for more details. It's a powerful tool for assessing performance and making informed decisions."
+"Feel free to interact with this tile. You can click on specific data points to access more detailed information. It's a valuable tool for maintaining code quality and ensuring our development process is effective."
 
 *Conclusion:*
-"In summary, this tile is a valuable resource for understanding average lead times within TC25 and the broader context of Jacqui Areas. It provides quick insights, and we have plans for even more detailed data in the future. It's a key component of our dashboard for data-driven decision-making."
+"In summary, this tile offers valuable insights into our pull request approval process by presenting the percentage of pull requests submitted without prior approval. It's a key component of our dashboard for quality control and process optimization."
