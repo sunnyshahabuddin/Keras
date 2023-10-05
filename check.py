@@ -1,35 +1,66 @@
-Certainly, when explaining a tile on your dashboard, such as "Percentage of Pull Requests Without Approval," you can use the following script as a guide:
+app.get('/dashboard', (req, res) => {
+  const response = {};
 
-*Title:*
-"Percentage of Pull Requests Without Approval"
+  // Execute the first query: SELECT AVG(sm_component_value) FROM table1
+  connection.query('SELECT AVG(sm_component_value) AS average_value FROM table1', (err, results) => {
+    if (err) {
+      console.error('Error executing the first query:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
 
-*Explanation:*
-"Let's explore another significant tile on our dashboard that sheds light on our project's efficiency in managing pull requests. This tile specifically focuses on the percentage of pull requests that are submitted without receiving prior approval."
+    // Add the result of the first query to the response
+    response.value1 = results[0].average_value;
 
-*Key Points:*
+    // Execute the second query: SELECT sm_component FROM table1
+    connection.query('SELECT sm_component FROM table1', (err, secondResults) => {
+      if (err) {
+        console.error('Error executing the second query:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+        return;
+      }
 
-1. *Importance of Pull Requests:*
-   - "Pull requests" are crucial for code review and quality control in our development process.
-   - They allow team members to review and approve code changes before they are merged into the main codebase.
+      // Add the result of the second query to the response
+      response.value2 = secondResults.map(result => result.sm_component);
 
-2. *Tracking Approval Process:*
-   - It's essential to track how many pull requests are submitted without prior approval.
-   - This metric helps us assess the effectiveness of our code review process and identify areas for improvement.
+      // Execute the third query, and so on...
+      connection.query('SELECT ...', (err, thirdResults) => {
+        if (err) {
+          console.error('Error executing the third query:', err);
+          res.status(500).json({ error: 'Internal Server Error' });
+          return;
+        }
 
-3. *Percentage Metric:*
-   - The data is presented as a percentage.
-   - This percentage represents the proportion of pull requests that were not approved before submission, relative to the total number of pull requests in the given timeframe.
+        // Add the result of the third query to the response
+        response.value3 = thirdResults;
 
-4. *Quick Insight:*
-   - This tile provides a quick snapshot of our pull request approval process.
-   - A higher percentage may indicate that some code changes are being merged without proper review, which could lead to quality issues.
+        // Execute the fourth query, and so on...
+        connection.query('SELECT ...', (err, fourthResults) => {
+          if (err) {
+            console.error('Error executing the fourth query:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+          }
 
-5. *Continuous Improvement:*
-   - We use this metric to drive continuous improvement in our development workflow.
-   - By monitoring this percentage, we can take proactive steps to ensure that code changes are thoroughly reviewed before merging.
+          // Add the result of the fourth query to the response
+          response.value4 = fourthResults;
 
-*Interactive Element:*
-"Feel free to interact with this tile. You can click on specific data points to access more detailed information. It's a valuable tool for maintaining code quality and ensuring our development process is effective."
+          // Execute the fifth query, and so on...
+          connection.query('SELECT ...', (err, fifthResults) => {
+            if (err) {
+              console.error('Error executing the fifth query:', err);
+              res.status(500).json({ error: 'Internal Server Error' });
+              return;
+            }
 
-*Conclusion:*
-"In summary, this tile offers valuable insights into our pull request approval process by presenting the percentage of pull requests submitted without prior approval. It's a key component of our dashboard for quality control and process optimization."
+            // Add the result of the fifth query to the response
+            response.value5 = fifthResults;
+
+            // At this point, all queries have completed, and you can send the final JSON response
+            res.json(response);
+          });
+        });
+      });
+    });
+  });
+});
