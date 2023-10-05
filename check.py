@@ -1,47 +1,36 @@
-Thank you for providing additional details about the Ranking page. Here's a more detailed breakdown of how the page works:
+Certainly, when explaining one of the tiles on your dashboard, such as "Average Lead Time for the Last 6 Months in TC25 for Jacqui Areas," you can use the following script as a guide:
 
-*Ranking Page - Detailed Walkthrough:*
+*Title:*
+"Average Lead Time for Last 6 Months in TC25 for Jacqui Areas"
 
-1. *Introduction (1-2 minutes):*
-   - Begin by introducing the Ranking page and its purpose.
-   - Explain that this page allows users to view rankings based on various criteria and themes.
+*Explanation:*
+"Let's dive into one of the tiles on our dashboard, which provides valuable insights into our project performance. This tile focuses on the average lead time for the last 6 months specifically within TC25, a crucial area for us, while considering the broader context of Jacqui Areas."
 
-2. *Date Selection (2-3 minutes):*
-   - Describe the "Select Date" dropdown.
-   - Explain that users can choose a date range, such as "Last Twelve Months," to view rankings for a specific period.
-   - Highlight the importance of selecting the right date range for accurate ranking analysis.
+*Key Points:*
 
-3. *Focus Selection (2-3 minutes):*
-   - Introduce the "Select Focus" dropdown.
-   - Explain that users can filter rankings based on whether an application is "In Focus," "Not In Focus," or view rankings for "All" applications.
-   - Discuss how this helps in evaluating specific subsets of applications.
+1. *Understanding Lead Time:*
+   - "Lead time" refers to the duration it takes for a user story to go from initiation to completion.
+   - It's a critical metric that helps us gauge how efficiently we are delivering user stories.
 
-4. *Theme Selection (2-3 minutes):*
-   - Describe the "Select Theme" dropdown.
-   - Highlight that users can choose from five themes, such as "Version Control" and others.
-   - Mention that the metrics displayed will vary based on the selected theme.
+2. *Granular Focus:*
+   - "TC25" is our specific area of interest. We're looking at lead times here, which is vital to understand for this area.
+   - "Jacqui Areas" represent a broader context within which TC25 operates. This allows us to see how TC25 performs within the larger framework.
 
-5. *Metric Display (3-4 minutes):*
-   - Show the metrics configured for the selected theme. For example, in the case of "Version Control," there might be metrics like "Number of Commits," "Mapped Repos," "Number of Pull Requests," and "Percent Story Lineage."
-   - Explain the relevance of each metric and how they contribute to the theme's evaluation.
+3. *Percentage Context:*
+   - We're not just looking at the average lead time in isolation; we're also examining it as a percentage.
+   - This percentage represents how our TC25 lead time compares to the overall average, giving us a quick view of TC25's performance relative to the whole.
 
-6. *Ranking Display (4-5 minutes):*
-   - Explain that the page will generate two sets of divs: one for the top five applications and another for the bottom five applications based on the selected metrics and criteria.
-   - Demonstrate how the rankings are displayed, including the application name and its corresponding metric values.
+4. *Global Lead Level:*
+   - At the same time, this tile provides insights at the global lead level.
+   - This allows us to see the overall status and trends across our project, which is crucial for making informed decisions.
 
-7. *User Interaction (2-3 minutes):*
-   - Encourage users to explore different date ranges, focus selections, and themes to view rankings for various scenarios.
-   - Mention that the rankings dynamically update based on user selections.
+5. *Future Enhancements:*
+   - We have plans to enhance this tile even further in the future.
+   - We're working on providing more detailed data at the global lead level, including insights at the delivery lead level.
+   - This means we'll have even more granular information for decision-making.
 
-8. *Conclusion (1-2 minutes):*
-   - Summarize the key features and capabilities of the Ranking page.
-   - Remind users that this tool provides valuable insights for assessing application performance.
-  
-9. *Q&A (5-10 minutes):*
-   - Open the floor for questions and address any queries or feedback from your audience.
-  
-10. *Closing Remarks (1-2 minutes):*
-   - Thank your audience for their participation and attention.
-   - Provide contact information for further inquiries or support.
+*Interactive Element:*
+"Feel free to interact with this tile. You can click on specific data points to drill down for more details. It's a powerful tool for assessing performance and making informed decisions."
 
-Ensure that your demonstration is clear and interactive, allowing users to see how rankings change based on different selections. Adapt the timing as needed to accommodate questions and discussions during the demo.
+*Conclusion:*
+"In summary, this tile is a valuable resource for understanding average lead times within TC25 and the broader context of Jacqui Areas. It provides quick insights, and we have plans for even more detailed data in the future. It's a key component of our dashboard for data-driven decision-making."
