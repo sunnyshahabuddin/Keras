@@ -1,66 +1,26 @@
-app.get('/dashboard', (req, res) => {
-  const response = {};
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+from Crypto.Util.Padding import pad, unpad
 
-  // Execute the first query: SELECT AVG(sm_component_value) FROM table1
-  connection.query('SELECT AVG(sm_component_value) AS average_value FROM table1', (err, results) => {
-    if (err) {
-      console.error('Error executing the first query:', err);
-      res.status(500).json({ error: 'Internal Server Error' });
-      return;
-    }
+key = get_random_bytes(16)
+iv = get_random_bytes(16)
 
-    // Add the result of the first query to the response
-    response.value1 = results[0].average_value;
 
-    // Execute the second query: SELECT sm_component FROM table1
-    connection.query('SELECT sm_component FROM table1', (err, secondResults) => {
-      if (err) {
-        console.error('Error executing the second query:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
-        return;
-      }
+def encrypt_password(password, key, iv):
+    password = password.encode()
+    cipher = AES.new(key, AES.MODE_CBC, iv)
+    ciphertext = cipher.encrypt(pad(password, AES.block_size))
+    return ciphertext
 
-      // Add the result of the second query to the response
-      response.value2 = secondResults.map(result => result.sm_component);
 
-      // Execute the third query, and so on...
-      connection.query('SELECT ...', (err, thirdResults) => {
-        if (err) {
-          console.error('Error executing the third query:', err);
-          res.status(500).json({ error: 'Internal Server Error' });
-          return;
-        }
+def decrypt_password(ciphertext, key, iv):
+    cipher = AES.new(key, AES.MODE_CBC, iv)
+    decrypted = unpad(cipher.decrypt(ciphertext), AES.block_size)
+    return decrypted.decode()
 
-        // Add the result of the third query to the response
-        response.value3 = thirdResults;
+password_to_encrypt = "my_secret_password"
+encrypted_password = encrypt_password(password_to_encrypt, key, iv)
+print(f"Encrypted Password: {encrypted_password}")
 
-        // Execute the fourth query, and so on...
-        connection.query('SELECT ...', (err, fourthResults) => {
-          if (err) {
-            console.error('Error executing the fourth query:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-            return;
-          }
-
-          // Add the result of the fourth query to the response
-          response.value4 = fourthResults;
-
-          // Execute the fifth query, and so on...
-          connection.query('SELECT ...', (err, fifthResults) => {
-            if (err) {
-              console.error('Error executing the fifth query:', err);
-              res.status(500).json({ error: 'Internal Server Error' });
-              return;
-            }
-
-            // Add the result of the fifth query to the response
-            response.value5 = fifthResults;
-
-            // At this point, all queries have completed, and you can send the final JSON response
-            res.json(response);
-          });
-        });
-      });
-    });
-  });
-});
+decrypted_password = decrypt_password(encrypted_password, key, iv)
+print(f"Decrypted Password: {decrypted_password}")
