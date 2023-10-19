@@ -1,26 +1,30 @@
-from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
-from Crypto.Util.Padding import pad, unpad
+import pyodbc
 
-key = get_random_bytes(16)
-iv = get_random_bytes(16)
+# Define your SQL Server connection parameters
+server = 'your_server_name'  # Replace with your SQL Server hostname
+database = 'your_database_name'  # Replace with your database name
+username = 'your_username'  # Replace with your username
+password = 'your_password'  # Replace with your password
 
+# Create a connection to the SQL Server
+connection = pyodbc.connect(f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}')
 
-def encrypt_password(password, key, iv):
-    password = password.encode()
-    cipher = AES.new(key, AES.MODE_CBC, iv)
-    ciphertext = cipher.encrypt(pad(password, AES.block_size))
-    return ciphertext
+# Create a cursor to interact with the database
+cursor = connection.cursor()
 
+# Define your SQL SELECT statement
+sql_query = 'SELECT * FROM your_table_name'  # Replace with your table name
 
-def decrypt_password(ciphertext, key, iv):
-    cipher = AES.new(key, AES.MODE_CBC, iv)
-    decrypted = unpad(cipher.decrypt(ciphertext), AES.block_size)
-    return decrypted.decode()
+# Execute the SELECT statement
+cursor.execute(sql_query)
 
-password_to_encrypt = "my_secret_password"
-encrypted_password = encrypt_password(password_to_encrypt, key, iv)
-print(f"Encrypted Password: {encrypted_password}")
+# Fetch the results
+results = cursor.fetchall()
 
-decrypted_password = decrypt_password(encrypted_password, key, iv)
-print(f"Decrypted Password: {decrypted_password}")
+# Iterate through the results and print them
+for row in results:
+    print(row)
+
+# Close the cursor and connection
+cursor.close()
+connection.close()
