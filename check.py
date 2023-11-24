@@ -1,7 +1,5 @@
-DELETE FROM your_table
-WHERE ROWID NOT IN (
-    SELECT MAX(ROWID) AS max_rowid
-    FROM your_table
-    GROUP BY a, b, c
-    HAVING COUNT(*) > 1
-);
+@echo off
+set FLASK_APP=app.py
+set FLASK_ENV=development
+set FLASK_RUN_PORT=5000
+flask run
