@@ -1,18 +1,20 @@
-import requests
 
-def hit_api_with_certificate(url, certificate_path):
-    try:
-        cert = (certificate_path, certificate_path)
-        response = requests.get(url, cert=cert)
-        if response.status_code == 200:
-            print("Response:", response.text)
-        else:
-            print("Error:", response.status_code, response.text)
+Subject: 🍴 Potluck Alert: Get Ready to Feast on Monday! 🎉
 
-    except Exception as e:
-        print("Error occurred:", e)
+Hey Team,
 
-api_url = "https://api.example.com"
-certificate_path = "/path/to/certificate.pem"
+The rumors are true – we're throwing a potluck this Monday, and the excitement is real! 🎉 Get ready to tantalize your taste buds because this is going to be a feast to remember.
 
-hit_api_with_certificate(api_url, certificate_path)
+Date: [Monday, Date]
+Time: [Start Time - End Time]
+Location: [Location]
+Theme: [If any specific theme]
+
+Don't even think about missing out on the mouthwatering dishes everyone's bringing! Let's bring our appetites and make this potluck one to remember. 🍲🍰🥗
+
+Can't wait to see what culinary delights await us all!
+
+Let's make it a bang!
+
+Cheers,
+[Your Name]
