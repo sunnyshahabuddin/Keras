@@ -1,20 +1,32 @@
-const fetch = require('node-fetch');
-const { KerberosClient } = require('kerberos-client');
+const https = require('https');
+const fs = require('fs');
 
-const url = 'http://localhost:5000/';
-const caPath = 'path/to/ca-bundle.crt';
+// Load the PEM certificate
+const cert = fs.readFileSync('/path/to/certificate.pem');
 
-(async () => {
-    try {
-        const kerberosClient = new KerberosClient();
-        const token = await fetch(url, {
-            agent: await kerberosClient.agent(),
-            ca: caPath ? require('fs').readFileSync(caPath) : undefined
-        }).then(response => response.json());
+// Options for the HTTPS request
+const options = {
+  hostname: 'nam-auth.client.narlcaycorp.com',
+  port: 443,
+  path: '/authn/authenticate',
+  method: 'GET',
+  cert: cert // Include the PEM certificate
+};
 
-        console.log(token);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-})();
+// Make the HTTPS request
+const req = https.request(options, (res) => {
+  console.log('statusCode:', res.statusCode);
+  console.log('headers:', res.headers);
 
+  res.on('data', (d) => {
+    process.stdout.write(d);
+  });
+});
+
+// Handle any errors that occur during the request
+req.on('error', (e) => {
+  console.error(e);
+});
+
+// End the request
+req.end();
