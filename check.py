@@ -1,19 +1,30 @@
+import json
+from openpyxl import Workbook
 
-User Guide for Ranking Page
+var = b'{"@data.context": "http://schema.org", "@data.type": "Person", "@data.id": "http://www.example.com", "@data.name": "John Doe", "value":[{"data": "test", "data2": "test2"}, {"data": "test3", "data2": "test4"}]}'
 
-1. Overview:
+# Convert bytes to string and then parse JSON
+var_str = var.decode('utf-8')
+data = json.loads(var_str)
 
-Displays tabular view of top 5 and bottom 5 applications for a selected month.
-2. Dropdowns:
+# Extract value
+value = data.get('value')
 
-Select Month: Choose a month from the dropdown.
-Application Selection: Choose between InFocus or All applications.
-Theme Selection: Select a theme; each theme contains several mapped key metrics.
-3. Color Coding:
+# Extract headers dynamically
+headers = set()
+for item in value:
+    headers.update(item.keys())
 
-Blue: Consistent in the list.
-Yellow: New entrants in the list.
-4. Tabular View:
+# Create a new Excel workbook
+wb = Workbook()
+ws = wb.active
 
-Lists top 5 and bottom 5 applications based on selected criteria.
-Provides comparative ranking for performance assessment.
+# Write headers
+ws.append(list(headers))
+
+# Write value
+for item in value:
+    ws.append([item.get(key, '') for key in headers])
+
+# Save workbook
+wb.save('value.xlsx')
