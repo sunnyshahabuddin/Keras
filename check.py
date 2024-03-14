@@ -1,32 +1,21 @@
-const https = require('https');
-const fs = require('fs');
 
-// Load the PEM certificate
-const cert = fs.readFileSync('/path/to/certificate.pem');
+User Guide for EiE Dashboard
 
-// Options for the HTTPS request
-const options = {
-  hostname: 'nam-auth.client.narlcaycorp.com',
-  port: 443,
-  path: '/authn/authenticate',
-  method: 'GET',
-  cert: cert // Include the PEM certificate
-};
+1. Landing Page Overview:
 
-// Make the HTTPS request
-const req = https.request(options, (res) => {
-  console.log('statusCode:', res.statusCode);
-  console.log('headers:', res.headers);
+The landing page provides a comprehensive view of 8 key metrics.
+Metrics include % build per merge and others relevant to your project.
+2. User Views:
 
-  res.on('data', (d) => {
-    process.stdout.write(d);
-  });
-});
+Two views available: CIO and Global Lead.
+Clicking on Global Lead allows drilling down to Portfolio Lead level.
+3. Color Coding:
 
-// Handle any errors that occur during the request
-req.on('error', (e) => {
-  console.error(e);
-});
+Red: Non-compliant, needs immediate attention.
+Amber: Slightly off-track, action required.
+Green: Within bounds, satisfactory.
+Gray: No data available for the metric.
+4. Switching Views:
 
-// End the request
-req.end();
+Dropdown option to switch between InFocus Application and All Applications.
+Helps focus on specific application metrics or view all applications collectively.
