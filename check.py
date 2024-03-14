@@ -1,28 +1,19 @@
-User Guide for Trend Report Page
 
-1. Trend Report Overview:
+User Guide for Ranking Page
 
-Displays trends based on themes.
-Each theme comprises several key metrics mapped to it.
-Generated dynamically at runtime.
-2. Theme Metrics:
+1. Overview:
 
-Example: For the "Version Control" theme:
-Number of commits.
-Number of mapped repositories.
-Number of pull requests.
-% story lineage.
-3. Date Range Selection:
+Displays tabular view of top 5 and bottom 5 applications for a selected month.
+2. Dropdowns:
 
-Choose a date range from the dropdown menu.
-Allows focusing on trends within specific time frames.
-4. Component Selection:
+Select Month: Choose a month from the dropdown.
+Application Selection: Choose between InFocus or All applications.
+Theme Selection: Select a theme; each theme contains several mapped key metrics.
+3. Color Coding:
 
-Select components for analysis.
-Options:
-Select all InFocus applications.
-Search and select a specific application from the dropdown.
-5. Trend Report Graphs:
+Blue: Consistent in the list.
+Yellow: New entrants in the list.
+4. Tabular View:
 
-Multiple graphs corresponding to each key metric.
-Provides visual representation of trends over time.
+Lists top 5 and bottom 5 applications based on selected criteria.
+Provides comparative ranking for performance assessment.
