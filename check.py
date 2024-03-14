@@ -1,21 +1,28 @@
+User Guide for Trend Report Page
 
-User Guide for EiE Dashboard
+1. Trend Report Overview:
 
-1. Landing Page Overview:
+Displays trends based on themes.
+Each theme comprises several key metrics mapped to it.
+Generated dynamically at runtime.
+2. Theme Metrics:
 
-The landing page provides a comprehensive view of 8 key metrics.
-Metrics include % build per merge and others relevant to your project.
-2. User Views:
+Example: For the "Version Control" theme:
+Number of commits.
+Number of mapped repositories.
+Number of pull requests.
+% story lineage.
+3. Date Range Selection:
 
-Two views available: CIO and Global Lead.
-Clicking on Global Lead allows drilling down to Portfolio Lead level.
-3. Color Coding:
+Choose a date range from the dropdown menu.
+Allows focusing on trends within specific time frames.
+4. Component Selection:
 
-Red: Non-compliant, needs immediate attention.
-Amber: Slightly off-track, action required.
-Green: Within bounds, satisfactory.
-Gray: No data available for the metric.
-4. Switching Views:
+Select components for analysis.
+Options:
+Select all InFocus applications.
+Search and select a specific application from the dropdown.
+5. Trend Report Graphs:
 
-Dropdown option to switch between InFocus Application and All Applications.
-Helps focus on specific application metrics or view all applications collectively.
+Multiple graphs corresponding to each key metric.
+Provides visual representation of trends over time.
