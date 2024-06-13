@@ -1,46 +1,28 @@
-import pandas as pd
-import mysql.connector
-from mysql.connector import errorcode
+const monthMap = {
+    "Jan": 1,
+    "Feb": 2,
+    "Mar": 3,
+    "Apr": 4,
+    "May": 5,
+    "Jun": 6,
+    "Jul": 7,
+    "Aug": 8,
+    "Sep": 9,
+    "Oct": 10,
+    "Nov": 11,
+    "Dec": 12
+};
 
-# Configuration for MySQL connection
-config = {
-    'user': 'your_username',
-    'password': 'your_password',
-    'host': 'localhost',
-    'database': 'your_database'
-}
+data.sort((a, b) => {
+    const [monthA, yearA] = a.month.split('-');
+    const [monthB, yearB] = b.month.split('-');
+    return yearA - yearB || monthMap[monthA] - monthMap[monthB];
+});
 
-# Path to your Excel file
-excel_file_path = 'path_to_your_excel_file.xlsx'
-
-# Read Excel file into DataFrame
-df = pd.read_excel(excel_file_path)
-
-# Establish MySQL connection
-try:
-    conn = mysql.connector.connect(**config)
-    cursor = conn.cursor()
-    
-    # Insert data into table
-    insert_query = f"""
-    INSERT INTO inc_data ({', '.join(df.columns)}) VALUES ({', '.join(['%s'] * len(df.columns))})
-    """
-    
-    for row in df.itertuples(index=False):
-        cursor.execute(insert_query, tuple(row))
-    
-    # Commit the transaction
-    conn.commit()
-
-except mysql.connector.Error as err:
-    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-        print("Something is wrong with your user name or password")
-    elif err.errno == errorcode.ER_BAD_DB_ERROR:
-        print("Database does not exist")
-    else:
-        print(err)
-finally:
-    if conn.is_connected():
-        cursor.close()
-        conn.close()
-        print("MySQL connection is closed")
+const series = Object.values(data.reduce((acc, { type_name, type_count }) => {
+    if (!acc[type_name]) {
+        acc[type_name] = { name: type_name, data: [] };
+    }
+    acc[type_name].data.push(type_count);
+    return acc;
+}, {}));
