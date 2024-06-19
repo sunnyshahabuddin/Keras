@@ -1,28 +1,21 @@
-const monthMap = {
-    "Jan": 1,
-    "Feb": 2,
-    "Mar": 3,
-    "Apr": 4,
-    "May": 5,
-    "Jun": 6,
-    "Jul": 7,
-    "Aug": 8,
-    "Sep": 9,
-    "Oct": 10,
-    "Nov": 11,
-    "Dec": 12
-};
+import openpyxl
 
-data.sort((a, b) => {
-    const [monthA, yearA] = a.month.split('-');
-    const [monthB, yearB] = b.month.split('-');
-    return yearA - yearB || monthMap[monthA] - monthMap[monthB];
-});
+def replace_newlines_in_excel(file_path, output_path):
+    # Load the workbook and select the active worksheet
+    wb = openpyxl.load_workbook(file_path)
+    ws = wb.active
 
-const series = Object.values(data.reduce((acc, { type_name, type_count }) => {
-    if (!acc[type_name]) {
-        acc[type_name] = { name: type_name, data: [] };
-    }
-    acc[type_name].data.push(type_count);
-    return acc;
-}, {}));
+    # Iterate through all cells in the worksheet
+    for row in ws.iter_rows():
+        for cell in row:
+            if cell.value and isinstance(cell.value, str):
+                # Replace newlines with spaces
+                cell.value = cell.value.replace('\n', ' ')
+
+    # Save the modified workbook
+    wb.save(output_path)
+
+# Example usage
+input_file = 'input.xlsx'  # Path to your input Excel file
+output_file = 'output.xlsx'  # Path to save the modified Excel file
+replace_newlines_in_excel(input_file, output_file)
