@@ -51,3 +51,25 @@ EXCEPTION
     ROLLBACK;
 END;
 /
+
+
+BEGIN
+    FOR rec IN (SELECT firstname, lastname, age FROM table1) LOOP
+        -- Validation checks
+        IF rec.firstname = rec.lastname THEN
+            RAISE_APPLICATION_ERROR(-20001, 'firstname and lastname cannot be same');
+        END IF;
+        
+        IF rec.age < 18 THEN
+            RAISE_APPLICATION_ERROR(-20002, 'age cannot be less than 18');
+        END IF;
+
+        -- If validations pass, insert the data
+        INSERT INTO table2 (firstname, lastname, age)
+        VALUES (rec.firstname, rec.lastname, rec.age);
+    END LOOP;
+END;
+
+
+
+
