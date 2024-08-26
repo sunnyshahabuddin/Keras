@@ -8,17 +8,33 @@ with open('insert_statements.sql', 'r') as file:
 
 statements = sql.split(';')
 
+batch_size = 1000
+batch = []
 error_log = []
 
 for statement in statements:
     statement = statement.strip()
     if statement:
-        try:
-            cursor.execute(statement)
-        except Exception as e:
-            error_log.append(f"Error executing statement: {statement}\nError: {e}")
+        batch.append(statement)
+        if len(batch) >= batch_size:
+            try:
+                for stmt in batch:
+                    cursor.execute(stmt)
+                conn.commit()
+            except Exception as e:
+                error_log.append(f"Batch error: {e}")
+                conn.rollback()
+            batch = []
 
-conn.commit()
+if batch:
+    try:
+        for stmt in batch:
+            cursor.execute(stmt)
+        conn.commit()
+    except Exception as e:
+        error_log.append(f"Batch error: {e}")
+        conn.rollback()
+
 cursor.close()
 conn.close()
 
