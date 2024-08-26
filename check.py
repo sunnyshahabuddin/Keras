@@ -1,35 +1,27 @@
-import pandas as pd
+import pyodbc
 
-file_path = r'C:\user\initial_data.xlsx'
+conn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=your_server;DATABASE=your_database;UID=your_user;PWD=your_password')
+cursor = conn.cursor()
 
-df = pd.read_excel(file_path, dtype=str, parse_dates=[0])
+with open('insert_statements.sql', 'r') as file:
+    sql = file.read()
 
-table_name = 'YourTable'
+statements = sql.split(';')
 
-insert_statements = []
+error_log = []
 
-for index, row in df.iterrows():
-    if isinstance(row[0], pd.Timestamp):
-        date_value = row[0].strftime('%d/%m/%Y')
-    else:
-        date_value = row[0].replace("'", "''")
-    
-    other_values = []
-    for i, value in enumerate(row[1:]):
-        if i == len(row[1:]) - 1:
-            if value.isnumeric():
-                other_values.append(str(int(value)))
-            else:
-                other_values.append(f"{value.replace("'", "''")}")
-        else:
-            other_values.append(f"'{value.replace("'", "''")}'")
-    
-    other_values_str = ', '.join(other_values)
-    insert_statement = f"INSERT INTO {table_name} VALUES ('{date_value}', {other_values_str});"
-    insert_statements.append(insert_statement)
+for statement in statements:
+    statement = statement.strip()
+    if statement:
+        try:
+            cursor.execute(statement)
+        except Exception as e:
+            error_log.append(f"Error executing statement: {statement}\nError: {e}")
 
-output_file_path = r'C:\user\insert_statements.sql'
-with open(output_file_path, 'w') as file:
-    file.write('\n'.join(insert_statements))
+conn.commit()
+cursor.close()
+conn.close()
 
-print(f"SQL insert statements saved to {output_file_path}")
+with open('error_log.txt', 'w') as log_file:
+    for error in error_log:
+        log_file.write(f"{error}\n")
