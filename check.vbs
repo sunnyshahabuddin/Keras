@@ -5,32 +5,33 @@ Sub ConvertCsvToPipeSeparated()
     Dim cell As Range
     Dim rowData As String
     Dim fileNumber As Integer
+    Dim sheetName As String
     
-    ' Set the worksheet to the active sheet
-    Set ws = ActiveSheet
+    sheetName = "YourSheetName"
+
+    On Error Resume Next
+    Set ws = Worksheets(sheetName)
+    On Error GoTo 0
+
+    If ws Is Nothing Then
+        MsgBox "Sheet named '" & sheetName & "' does not exist.", vbExclamation
+        Exit Sub
+    End If
+
+    outputFile = ThisWorkbook.Path & "\" & ws.Name & "_pipe_separated.txt"
     
-    ' Define the output file name
-    outputFile = ws.Parent.Path & "\" & ws.Name & "_pipe_separated.txt"
-    
-    ' Get a free file number
     fileNumber = FreeFile
     
-    ' Open the output file for writing
     Open outputFile For Output As #fileNumber
     
-    ' Loop through each row in the sheet
     For Each row In ws.UsedRange.Rows
         rowData = ""
-        ' Loop through each cell in the row
         For Each cell In row.Cells
-            ' Append cell value to row data separated by '|'
             rowData = rowData & cell.Value & "|"
         Next cell
-        ' Remove the trailing '|' and write to the output file
         Print #fileNumber, Left(rowData, Len(rowData) - 1)
     Next row
 
-    ' Close the output file
     Close #fileNumber
     
     MsgBox "Conversion complete! File saved as: " & outputFile
