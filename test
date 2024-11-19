@@ -1,0 +1,27 @@
+from pylatex import Document, Section, Subsection, Command
+from pylatex.utils import italic, NoEscape
+
+def create_pdf(output_path="output.pdf"):
+    # Create a LaTeX document
+    doc = Document()
+
+    # Add content to the document
+    doc.preamble.append(Command('title', 'Sample Document'))
+    doc.preamble.append(Command('author', 'Author Name'))
+    doc.preamble.append(Command('date', NoEscape(r'\today')))
+    doc.append(NoEscape(r'\maketitle'))
+
+    with doc.create(Section('Introduction')):
+        doc.append('This is the introduction section of the document.')
+
+    with doc.create(Section('Details')):
+        doc.append('Details about the document go here.')
+        with doc.create(Subsection('Subsection Example')):
+            doc.append(italic('This is a subsection with italic text.'))
+
+    # Generate and save the PDF
+    doc.generate_pdf(output_path, clean_tex=False)
+    print(f"PDF generated: {output_path}")
+
+if __name__ == "__main__":
+    create_pdf()
